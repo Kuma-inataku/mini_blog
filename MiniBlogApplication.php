@@ -1,9 +1,4 @@
 <?php
-// 自動で読み込み
-require './vendor/autoload.php';
-
-// .envを使用する
-Dotenv\Dotenv::createImmutable(__DIR__)->load();
 
 class MiniBlogApplication extends Application
 {
@@ -25,11 +20,8 @@ class MiniBlogApplication extends Application
     {
       $this->db_manager->connect('master', [
         'dsn' => 'mysql:dbname=mini_blog;host=localhost',
-        // TODO: DB接続エラーがでたら変更
-        // 'user' => '',
-        // 'password' => '',
-        'user' => $_ENV['DB_USER_NAME'],
-        'password' => $_ENV['DB_PASSWORD'],
+        'user' => 'root',
+        'password' => 'root123',
       ]);
     }
 }
