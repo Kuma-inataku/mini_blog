@@ -6,7 +6,7 @@ class UserRepository extends DbRepository
     $password = $this->hashPassword($password);
     $now = new DateTime();
 
-    $spl = "INSERT INTO user(user_name, password, created_at) VALUES(:user_name, :password, :created_at)";
+    $sql = "INSERT INTO user(user_name, password, created_at) VALUES(:user_name, :password, :created_at)";
 
     $stmt = $this->execute($sql, [
       ':user_name' => $user_name,
@@ -19,5 +19,24 @@ class UserRepository extends DbRepository
   {
     // ランダムな文字列追加
     return sha1($password.'ttttiiii');
+  }
+
+  public function fetchByUserName($user_name)
+  {
+    $sql = "SELECT * FROM user WHERE user_name = :user_name";
+
+    return $this->fetch($sql, [':user_name' => $user_name]);
+  }
+
+  public function isUniqueUserName($user_name)
+  {
+    $sql = "SELECT COUNT(id) as count FROM user WHERE user_name = :user_name";
+
+    $row = $this->fetch($sql, [':user_name' => $user_name]);
+    if($row['count'] === 0){
+      return true;
+    }
+
+    return false;
   }
 }
