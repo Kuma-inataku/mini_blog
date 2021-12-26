@@ -4,27 +4,38 @@ class Router
 {
   protected $routes;
 
+  /**
+   * コンストラクタ
+   *
+   * @param array $definitions
+   */
   public function __construct($definitions)
   {
     $this->routes = $this->compileRoutes($definitions);
   }
 
-  public function compileRoutes($definitions)
-  {
+    /**
+     * ルーティング定義配列を内部用に変換する
+     *
+     * @param array $definitions
+     * @return array
+     */
+    public function compileRoutes($definitions)
+    {
     $routes = [];
 
     foreach ($definitions as $url => $params) {
-      $tokens = explode('/', ltrim($url, '/'));
-      foreach ($tokens as $i => $token) {
-        if (0 === strpos($token, ':')) {
-          $name = substr($token, 1);
-          $token = '(?P<' . $name . '>[^/]+';
+        $tokens = explode('/', ltrim($url, '/'));
+        foreach ($tokens as $i => $token) {
+            if (0 === strpos($token, ':')) {
+              $name = substr($token, 1);
+              $token = '(?P<' . $name . '>[^/]+)';
+            }
+            $tokens[$i] = $token;
         }
-        $tokens[$i] = $token;
-      }
 
-      $pattern = '/' . implode('/', $tokens);
-      $routes[$pattern] = $params;
+        $pattern = '/' . implode('/', $tokens);
+        $routes[$pattern] = $params;
     }
 
     return $routes;
