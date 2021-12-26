@@ -6,28 +6,25 @@ class MiniBlogApplication extends Application
 
     public function getRootDir()
     {
-      return dirname(__FILE__);
+        return dirname(__FILE__);
     }
 
     protected function registerRoutes()
     {
-      return [
-        '/account' => [
-          'controller' => 'account',
-          'action' => 'index',
-        ],
-        '/account/:action' => [
-          'controller' => 'account',
-        ],
-      ];
+        return [
+            '/account'
+            => array('controller' => 'account', 'action' => 'index'),
+        '/account/:action'
+            => array('controller' => 'account'),
+        ];
     }
 
     protected function configure()
     {
-      $this->db_manager->connect('master', [
-        'dsn' => 'mysql:dbname=mini_blog;host=localhost',
-        'user' => 'root',
-        'password' => 'root123',
-      ]);
+        $this->db_manager->connect('master', [
+            'dsn' => 'mysql:dbname=mini_blog;host=localhost',
+            'user' => 'root',
+            'password' => 'root123',
+        ]);
     }
 }
