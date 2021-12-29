@@ -12,10 +12,14 @@ class MiniBlogApplication extends Application
     protected function registerRoutes()
     {
         return [
+            '/'
+                => array('controller' => 'status', 'action' => 'index'),
+            '/stasus/post'
+                => array('controller' => 'status', 'action' => 'post'),
             '/account'
-            => array('controller' => 'account', 'action' => 'index'),
-        '/account/:action'
-            => array('controller' => 'account'),
+                => array('controller' => 'account', 'action' => 'index'),
+            '/account/:action'
+                => array('controller' => 'account'),
         ];
     }
 
