@@ -5,6 +5,8 @@ class AccountController extends Controller
   public function signupAction()
   {
     return $this->render([
+      'user_name' => '',
+      'password' => '',
       '_token' => $this->generateCsrfToken('account/signup'),
     ]);
   }
