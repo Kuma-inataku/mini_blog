@@ -14,7 +14,7 @@ class MiniBlogApplication extends Application
         return [
             '/'
                 => array('controller' => 'status', 'action' => 'index'),
-            '/stasus/post'
+            '/status/post'
                 => array('controller' => 'status', 'action' => 'post'),
             '/account'
                 => array('controller' => 'account', 'action' => 'index'),
