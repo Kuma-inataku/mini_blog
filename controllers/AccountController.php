@@ -18,8 +18,8 @@ class AccountController extends Controller
     }
 
     $token = $this->request->getPost('_token');
-    if(! $this->checkCsrfToken('accout/signup', $token)){
-      return $this->redirect('/accout/signup');
+    if(! $this->checkCsrfToken('account/signup', $token)){
+      return $this->redirect('/account/signup');
     }
 
     $user_name = $this->request->getPost('user_name');
@@ -28,11 +28,11 @@ class AccountController extends Controller
     $errors = [];
 
     if (! strlen($user_name)) {
-      $errors[] = 'ユーザーIDを入力してください。';
+      $errors[] = 'ユーザー名を入力してください。';
     } elseif (! preg_match('/^\w{3,20}$/', $user_name)) {
-      $errors[] = 'ユーザーIDは半角英数字およびアンダースコアを3～20文字以内で入力してください。';
+      $errors[] = 'ユーザー名は半角英数字およびアンダースコアを3～20文字以内で入力してください。';
     } elseif (! $this->db_manager->get('User')->isUniqueUserName($user_name)) {
-      $errors[] = 'ユーザーIDは既に使用されています。';
+      $errors[] = 'ユーザー名は既に使用されています。';
     }
 
     if(! strlen($password)) {
@@ -42,9 +42,11 @@ class AccountController extends Controller
     }
 
     if (count($errors) === 0) {
+      // TODO: 'U'小文字？
       $this->db_manager->get('User')->insert($user_name, $password);
       $this->session->setAuthenticated(true);
 
+      // TODO: 'U'小文字？
       $user = $this->db_manager->get('User')->fetchByUserName($user_name);
       $this->session->set('user', $user);
 
