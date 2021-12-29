@@ -11,7 +11,6 @@ class StatusController extends Controller
     return $this->render([
       'statuses' => $statuses,
       'body' => '',
-      // TODO: post?
       '_token' => $this->generateCsrfToken('status/post'),
     ]);
   }
