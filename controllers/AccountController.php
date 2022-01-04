@@ -2,6 +2,8 @@
 
 class AccountController extends Controller
 {
+  protected $auth_actions = ['index', 'signout'];
+
   public function indexAction()
   {
     $user = $this->session->get('user');

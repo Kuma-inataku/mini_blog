@@ -2,6 +2,8 @@
 
 class StatusController extends Controller
 {
+  protected $auth_actions = ['index', 'post'];
+
   public function indexAction()
   {
     // TODO: 'u'大文字？
