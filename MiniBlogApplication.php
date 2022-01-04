@@ -27,6 +27,10 @@ class MiniBlogApplication extends Application
                 => array('controller' => 'account', 'action' => 'index'),
             '/account/:action'
                 => array('controller' => 'account'),
+
+            // Followのルーティング
+            '/follow'
+                => array('controller' => 'account', 'action' => 'follow'),
         ];
     }
 
